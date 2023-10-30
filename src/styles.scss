@@ -1,0 +1,99 @@
+@font-face {
+  font-family: jost-regular;
+  src: url("../fonts/Jost/static/Jost-Regular.ttf");
+}
+
+$aire: 4px;
+$fondo: #141414;
+$color: white;
+$font-size-root: 32px;
+$border-radius: 8px;
+
+* {
+  box-sizing: border-box;
+  font-size: $font-size-root;
+}
+
+body {
+  font-family: jost-regular, Arial, Helvetica, sans-serif;
+  padding: 0px;
+  margin: 0px;
+  height: 100vh;
+  width: 100vw;
+  background-color: $fondo;
+  color: $color;
+
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  height: 15vh;
+  padding: $aire * 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  div.header-logo {
+    padding: 2 * $aire;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div.platform-title {
+      padding: 4 * $aire;
+      width: 100%;
+    }
+  }
+
+  div.header-buttons {
+    padding: 2 * $aire;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+    div {
+      padding: 2 * $aire;
+      border-radius: $border-radius;
+
+      &:hover {
+        background-color: white;
+        color: blue;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+main {
+  height: 85vh;
+  display: grid;
+  grid-template: 1fr 10fr 1fr 5fr 1fr 5fr / 1fr;
+
+  div.section-title {
+    span#top-text::after {
+      content: "5";
+    }
+  }
+
+  section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    &.top {
+      flex-direction: row-reverse;
+    }
+
+    img {
+      width: 95%;
+      cursor: pointer;
+    }
+  }
+}
+
+footer {
+  display: none;
+}
