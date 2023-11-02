@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/rrll74/MFE_Mod01-Reto#readme",
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.10.1"
+    "@parcel/transformer-sass": "^2.10.2",
+    "parcel": "^2.10.2"
   }
 }

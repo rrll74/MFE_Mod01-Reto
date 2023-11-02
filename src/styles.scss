@@ -3,15 +3,19 @@
   src: url("../fonts/Jost/static/Jost-Regular.ttf");
 }
 
+// Valores comunes
 $aire: 4px;
 $fondo: #141414;
 $color: white;
 $font-size-root: 32px;
 $border-radius: 8px;
+$min-height-img-top: 225px;
+$min-height-img-first-second: 250px;
 
 * {
   box-sizing: border-box;
   font-size: $font-size-root;
+  // overflow: hidden;
 }
 
 body {
@@ -25,13 +29,13 @@ body {
 
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
 }
 
 header {
   height: 15vh;
   padding: $aire * 2;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
 
   div.header-logo {
@@ -67,9 +71,15 @@ header {
 }
 
 main {
-  height: 85vh;
+  max-height: 84vh;
   display: grid;
-  grid-template: 1fr 10fr 1fr 5fr 1fr 5fr / 1fr;
+  grid-template: 1fr 5fr repeat (4, 1fr) / 1fr;
+  justify-content: stretch;
+
+  img {
+    width: 100%;
+    cursor: pointer;
+  }
 
   div.section-title {
     span#top-text::after {
@@ -79,21 +89,100 @@ main {
 
   section {
     display: flex;
-    flex-direction: row;
     justify-content: space-evenly;
-    align-items: center;
 
     &.top {
-      flex-direction: row-reverse;
+      flex-flow: row-reverse nowrap;
+
+      div img {
+        min-width: $min-height-img-top;
+      }
     }
 
-    img {
-      width: 95%;
-      cursor: pointer;
+    &.first,
+    &.second {
+      display: flex;
+      flex-wrap: nowrap;
+      column-gap: $aire;
+      div img {
+        min-width: $min-height-img-first-second;
+      }
     }
   }
 }
 
 footer {
   display: none;
+}
+
+@function img_portada($imagenes) {
+  @return $imagenes * ($min-height-img-top + $aire);
+}
+
+@media screen and (width < 1280px) and (width > img_portada(3)) {
+  .platform-title {
+    display: none;
+  }
+
+  main {
+    div.section-title {
+      span#top-text::after {
+        content: "3";
+      }
+    }
+    section {
+      &.top {
+        flex-flow: row-reverse nowrap;
+
+        & > :nth-child(1),
+        & > :nth-child(2) {
+          display: none;
+        }
+      }
+
+      &.first,
+      &.second {
+        flex-wrap: wrap;
+        div img {
+          min-width: $min-height-img-first-second;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (width <= img_portada(3)) {
+  .platform-title {
+    display: none;
+  }
+
+  main {
+    div.section-title {
+      span#top-text::after {
+        content: "3";
+      }
+    }
+
+    section {
+      &.top {
+        display: flex;
+        flex-flow: column-reverse wrap;
+        justify-content: stretch;
+        align-content: center;
+
+        & > :nth-child(1),
+        & > :nth-child(2) {
+          display: none;
+        }
+      }
+
+      &.first,
+      &.second {
+        flex-wrap: wrap;
+        div img {
+          min-width: $min-height-img-first-second;
+        }
+      }
+    }
+  }
 }
